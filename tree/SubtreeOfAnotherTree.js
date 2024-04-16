@@ -47,8 +47,3 @@ function main() {
 	console.log(isSubtree(node1, node2));
 }
 main();
-
-/*
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDMTb4v6N6XqGZrij7S3sJc4sARsCmhy6c11RpR9L0brXHSQqmRSpgzPCC6/f2ZgfsabAI/oMXycgR/9L/r9/1VG1e4PlmedJrObZyH4KQuWTDyd/yOjqKoP9iYK939T4k4LS5vKMyvd7rxnaa6zaR86ceMsAKOzxeKkPhlKaeiwymK7ffbImJhCh8YnqAD1LNZAqHbaX5go1rZ+Tw6rk1qwyvfHI+xqLv331GepCQ5MywOD1xu2WdEHRAA0uf1+s7IqxXmwa+4JuwxztopXCRFXqsZKatYbHNH2rA7OOGTm6IPb074FrzMnEJBDWOHxpgG/7r0hJJVXg/qG5XIU3OZTb5dKuJ+B2ee5C1C8II+B0ve3xECKgF7aAFiUw2PB/9F/LbTJ+lh3l9YMds2bIeFnPwwIFejWhQiAc/w2pXiYslt5YCibr+JcFoQMSodvu15DWCC6zwnI1YWNpkpIWFeCAKTMb5roDIdMaYSeSWWE5RK3SFnJkYU8lsUnEk9HN8= tarun@tarun
-
-*/
