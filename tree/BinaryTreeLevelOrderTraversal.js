@@ -14,24 +14,36 @@ function TreeNode(val, left, right) {
  * @return {number[][]}
  */
 var levelOrder = function(root) {
-    
+	if(!root)	return [];
+
+	const stack = [root];
+	const result = [];
+	
+	while(stack && stack.length > 0) {
+		let k = stack.length;
+
+		const temp = [];
+		while(k) {
+			const node = stack.shift();
+			temp.push(node.val);			
+			if(node.left)	stack.push(node.left);
+			if(node.right)	stack.push(node.right);
+			k--;
+		}
+		result.push(temp);
+	}
+	return result;
 };
 
 // Driver function
 function main() {
-	const node = new TreeNode(6);
-	node.left = new TreeNode(2);
-	node.right = new TreeNode(8);
-	node.right.left = new TreeNode(7);
-	node.right.right = new TreeNode(9);
-	node.left.left = new TreeNode(0);
-	node.left.right = new TreeNode(4);
-	node.left.right.left = new TreeNode(3);
-	node.left.right.right = new TreeNode(5);
-	
-	const p = node.left;
-	const q = node.right;
-
-	console.log(lowestCommonAncestor(node, p, q).val);
+	const node = new TreeNode(3);
+	node.left = new TreeNode(9);
+	node.right = new TreeNode(20);
+	node.right.left = new TreeNode(15);
+	node.right.right = new TreeNode(7);
+		
+	const result = levelOrder(node);
+	console.log(result);
 }
 main();
