@@ -18,26 +18,45 @@ const traverseTree = (root) => {
 }
 
 var maxPathSum = function(root) {
-    
+	let maxSum = Number.MIN_SAFE_INTEGER;
+	function util(root) {
+		if(!root)	return 0;
+
+		const leftSum = util(root.left, maxSum);
+		const rightSum = util(root.right, maxSum);
+
+		const withoutChild = Math.max(root.val, root.val + Math.max(leftSum, rightSum));
+		const withChild = Math.max(withoutChild, root.val + leftSum + rightSum);
+
+		maxSum = Math.max(maxSum, withChild);
+		return withoutChild;
+	}
+
+	util(root);
+	return maxSum;
 };
 
 // Driver function
 function main() {
-	const root = new TreeNode(3);
-	root.left = new TreeNode(1);
-	root.right = new TreeNode(4);
-	root.left.right = new TreeNode(1);
-	console.log(kthSmallest(root, 1));
-
-	// const root = new TreeNode(5);
-	// root.left = new TreeNode(3);
-	// root.right = new TreeNode(6);
-	// root.left.left = new TreeNode(2);
-	// root.left.right = new TreeNode(4);
-	// root.left.left.left = new TreeNode(1);
-	// console.log(kthSmallest(root, 3));
+	// const root = new TreeNode(-10);
+	// root.left = new TreeNode(9);
+	// root.right = new TreeNode(20);
+	// root.right.left = new TreeNode(15);
+	// root.right.right = new TreeNode(7);
 
 	// const root = new TreeNode(1);
-	// console.log(kthSmallest(root, 1));
+	// root.left = new TreeNode(2);
+	// root.right = new TreeNode(3);
+
+	const root = new TreeNode(-3);
+
+	// const root = new TreeNode(2);
+	// root.left = new TreeNode(-1)
+
+	// const root = new TreeNode(1);
+	// root.left = new TreeNode(-2)
+	// root.right = new TreeNode(3)
+
+	console.log(maxPathSum(root));	
 }
 main();
