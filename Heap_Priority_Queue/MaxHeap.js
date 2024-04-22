@@ -96,4 +96,8 @@ export class MaxHeap {
     empty() {
     	return this.heap.length === 0;
     }
+
+    list() {
+    	return this.heap
+    }
 }

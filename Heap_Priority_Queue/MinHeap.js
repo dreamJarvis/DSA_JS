@@ -1,4 +1,4 @@
-class MinHeap {
+export class MinHeap {
     constructor() {
         this.heap = [];
     }
@@ -59,6 +59,7 @@ class MinHeap {
         this.heap.push(item);
         this.heapifyUp();
     }
+    // when element is added to the heap
     heapifyUp() {
         let index = this.heap.length - 1;
         while (this.hasParent(index) && this.parent(index) > this.heap[index]) {
@@ -66,6 +67,7 @@ class MinHeap {
             index = this.getParentIndex(index);
         }
     }
+    // when element is removed from the heap
     heapifyDown() {
         let index = 0;
         while (this.hasLeftChild(index)) {
@@ -88,8 +90,13 @@ class MinHeap {
         }
         console.log(heap);
     }
-
     size() {
-    	return this?.heap ? this.heap.length : 0;
+        return this.heap ? this.heap.length : 0;
+    }
+    list() {
+    	return this.heap
+    }
+    empty() {
+    	return this.heap.length === 0;
     }
 }

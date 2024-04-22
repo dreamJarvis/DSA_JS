@@ -3,8 +3,8 @@
 	https://leetcode.com/problems/design-twitter/description/	
 */
 var Twitter = function() {
-    this.userToFollowerMap = {};
     this.posts = [];
+    this.follwers = {};
 };
 
 /** 
@@ -14,12 +14,11 @@ var Twitter = function() {
  */
 Twitter.prototype.postTweet = function(userId, tweetId) {
     this.posts.push({
-            userId,
-            tweetId
-        });
-    if (!this.userToFollowerMap[userId]) {
-        this.userToFollowerMap[userId] = new Set();
-    }
+        userId,
+        tweetId
+    })
+    if(!this.follwers[userId])
+        this.follwers[userId] = new Set();
 };
 
 /** 
@@ -27,18 +26,19 @@ Twitter.prototype.postTweet = function(userId, tweetId) {
  * @return {number[]}
  */
 Twitter.prototype.getNewsFeed = function(userId) {
-    const fallbackStack = [...this.posts];
-    const feed = [];
-    if (!this.userToFollowerMap[userId]) return [];
-    while (feed.length < 10 && this.posts.length) {
+    const prevPosts = [...this.posts];
+    const result = [];
+
+    if(!this.follwers[userId])   return []; // user doesn't follows anyone
+    while(result.length < 10 && this.posts.length) {
         const post = this.posts.pop();
-        if (post.userId !== userId && !this.userToFollowerMap[userId].has(post.userId)) {
+        if(post.userId !== userId && !this.follwers[userId].has(post.userId))
             continue;
-        }
-        feed.push(post.tweetId);
+        result.push(post.tweetId);
     }
-    this.posts = fallbackStack;
-    return feed.length ? feed : [];
+
+    this.posts = prevPosts;
+    return result.length ? result : [];
 };
 
 /** 
@@ -47,10 +47,9 @@ Twitter.prototype.getNewsFeed = function(userId) {
  * @return {void}
  */
 Twitter.prototype.follow = function(followerId, followeeId) {
-    if (!this.userToFollowerMap[followerId]) {
-        this.userToFollowerMap[followerId] = new Set();
-    }
-    this.userToFollowerMap[followerId].add(followeeId);
+    if(!this.follwers[followerId])
+        this.follwers[followerId] = new Set();
+    this.follwers[followerId].add(followeeId);
 };
 
 /** 
@@ -59,17 +58,8 @@ Twitter.prototype.follow = function(followerId, followeeId) {
  * @return {void}
  */
 Twitter.prototype.unfollow = function(followerId, followeeId) {
-    this.userToFollowerMap[followerId].delete(followeeId);
+    this.follwers[followerId].delete(followeeId);
 };
-
-/** 
- * Your Twitter object will be instantiated and called as such:
- * var obj = new Twitter()
- * obj.postTweet(userId,tweetId)
- * var param_2 = obj.getNewsFeed(userId)
- * obj.follow(followerId,followeeId)
- * obj.unfollow(followerId,followeeId)
- */
 
 const twitter = new Twitter();
 twitter.postTweet(1, 1);
