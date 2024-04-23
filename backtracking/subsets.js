@@ -37,7 +37,6 @@ var subsetsIterative = function(nums) {
 	return stack;
 };
 
-
 // driver function
 function main() {
 	const nums = [1,2,3];
