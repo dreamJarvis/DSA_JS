@@ -28,6 +28,28 @@ var subsetsWithDup = function(nums) {
     }
 };
 
+var subsetsWithDup2 = function(nums) {
+    const n = nums.length;
+    const result = [];
+    const set = new Set();
+    nums.sort((a, b) => a-b);
+
+    function util(subset, index) {
+    	if(index === n) {
+    		if(!set.has(subset.toString())){
+	    		result.push([...subset]);
+	    		set.add(subset.toString());
+    		}
+    		return;
+    	}
+
+    	const temp = [...subset, nums[index]];
+    	return util(temp, index+1) || util(subset, index+1);
+    }
+    util([], 0);
+    return result;
+};
+
 // driver
 function main() {
 	// const nums = [1,2,2];
@@ -37,18 +59,3 @@ function main() {
 	return;
 }
 main();
-
-/*
-xample 1:
-
-Input: nums = [1,2,2]
-Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
-
-Example 2:
-
-Input: nums = [0]
-Output: [[],[0]]
-
-[[],[1],[1,4],[1,4,4],[1,4,4,4],[1,4,4,4,4],[4],[4,4],[4,4,4],[4,4,4,4]]
-[[4,4,4,1,4],[4,4,4,1],[4,4,4,4],[4,4,4],[4,4,1,4],[4,4,1],[4,4],[4,1,4],[4,1],[4],[1,4],[1],[]]
-*/
