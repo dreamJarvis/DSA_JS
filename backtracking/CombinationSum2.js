@@ -19,7 +19,15 @@ var combinationSum2 = function(candidates, target) {
 			return;
 		} else {
 			for(let i=index; i<n; i++) {
-				if(candidates[i] > target)	continue;
+				/* 
+					as the array is sorted, so all the items preceeding this index will be > candidates[i] 
+				*/
+				if(candidates[i] > target)	return;
+
+				/* 
+					if the prev element is same to current 'i' && i > index,
+					i.e. i is preceeding index of the array
+				*/
 				if(i && (candidates[i] === candidates[i-1]) && i > index)	continue;
 
 				subset.push(candidates[i]);
@@ -28,6 +36,7 @@ var combinationSum2 = function(candidates, target) {
 			}
 		}
 	}
+	
 	util(0, target);
 	return result;
 };
