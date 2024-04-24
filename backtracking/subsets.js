@@ -33,7 +33,7 @@ var subsetsIterative = function(nums) {
 			stack.push([...stack[i], nums[index]]);
 		index++;
 	}
-
+	
 	return stack;
 };
 
