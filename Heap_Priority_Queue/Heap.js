@@ -1,5 +1,6 @@
 /** 
  *  custom Heap class
+ *  comparator: pass on the comparator accordingly i.e (max/min) heap 
  */
 export class Heap {
 	constructor(comparator) {
@@ -41,7 +42,7 @@ export class Heap {
 		}
 	}
 
-	// removing item: item removed, streamed down from top to bottom
+	// removing item: item removed, streamed down from top to bottom (heapify the tree)
 	bubbleDown() {
 		let index = 0, length = this.values.length;
 
@@ -51,6 +52,7 @@ export class Heap {
 				swap = null,
 				leftIndex = index * 2 + 1,
 				rightIndex = index * 2 + 2;
+
 			const parent = this.values[index];
 
 			if (leftIndex < length) {
@@ -67,6 +69,12 @@ export class Heap {
 					swap = rightIndex;
 				}
 			}
+
+			/*
+				loop breaks if:
+					1) tree is already heapified
+					2) tree is fully traversed
+			*/
 			if (swap === null) break;
 
 			[parent, this.values[swap]] = [this.values[swap], parent];

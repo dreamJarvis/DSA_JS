@@ -1,6 +1,6 @@
-/*
+/* 
 	39. Combination Sum
-*/ 
+*/
 /**
  * @param {number[]} candidates
  * @param {number} target
@@ -21,6 +21,7 @@ var combinationSum = function(candidates, target) {
             temp.pop();
         }
     }
+
     const res = []
     comb(candidates, target, res, [], 0)
     
